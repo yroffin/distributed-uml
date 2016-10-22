@@ -30,7 +30,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @EnableAutoConfiguration
-@ComponentScan
+@ComponentScan("org.distributed.uml")
 public class DistributedUmlServer {
 	protected static String normalizedPath = DistributedUmlStatic.normalizedPath;
 	protected static Logger logger = LoggerFactory.getLogger(DistributedUmlServer.class);

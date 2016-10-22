@@ -27,7 +27,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import net.sourceforge.plantuml.FileFormat;
 import net.sourceforge.plantuml.FileFormatOption;
@@ -38,7 +38,7 @@ import net.sourceforge.plantuml.cucadiagram.dot.GraphvizUtils;
 /**
  * main daemon
  */
-@Component
+@Service
 public class PlantUmlService {
 	protected Logger logger = LoggerFactory.getLogger(PlantUmlService.class);
 
@@ -50,7 +50,7 @@ public class PlantUmlService {
 	 */
 	@PostConstruct
 	public void init() {
-		GraphvizUtils.setDotExecutable(StringUtils.eventuallyRemoveStartingAndEndingDoubleQuote(env.getProperty("jarvis.dot.executable")));
+		GraphvizUtils.setDotExecutable(StringUtils.eventuallyRemoveStartingAndEndingDoubleQuote(env.getProperty("distributed-uml.dot.executable")));
 	}
 
 	/**

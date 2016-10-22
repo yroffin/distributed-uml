@@ -36,7 +36,7 @@ import com.google.common.collect.ImmutableList;
 @Component
 @PropertySources({
 	@PropertySource(value = "classpath:server.properties", ignoreResourceNotFound = true),
-	@PropertySource(value = "file://${jarvis.user.dir}/config.properties", ignoreResourceNotFound = true)
+	@PropertySource(value = "file://${distributed-uml.user.dir}/config.properties", ignoreResourceNotFound = true)
 })
 public class PlantUmlServerDaemon {
 	protected Logger logger = LoggerFactory.getLogger(PlantUmlServerDaemon.class);
@@ -56,16 +56,16 @@ public class PlantUmlServerDaemon {
 	public void server() {
 		
 		for(String key : ImmutableList.of(
-				"jarvis.user.dir",
-				"jarvis.log.dir",
-				"jarvis.server.url")) {
+				"distributed-uml.user.dir",
+				"distributed-uml.log.dir",
+				"distributed-uml.server.url")) {
 			logger.info("{} = {}", key, env.getProperty(key));
 		}
 		
-		String iface = env.getProperty("jarvis.server.interface");
-		int port = Integer.parseInt(env.getProperty("jarvis.server.port"));
+		String iface = env.getProperty("distributed-uml.server.interface");
+		int port = Integer.parseInt(env.getProperty("distributed-uml.server.port"));
 		spark.Spark.ipAddress(iface);
-		spark.Spark.threadPool(Integer.parseInt(env.getProperty("jarvis.server.pool.thread","8")));
+		spark.Spark.threadPool(Integer.parseInt(env.getProperty("distributed-uml.server.pool.thread","8")));
 		
 		/**
 		 * port
