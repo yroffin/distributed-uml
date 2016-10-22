@@ -7,10 +7,10 @@
 		<version>0.0.1-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
+	
+	<name>PlantUml service</name>
 	<groupId>distributed-uml</groupId>
-	<artifactId>distributed-uml-server</artifactId>
-	<name>Server module</name>
-	<packaging>jar</packaging>
+	<artifactId>distributed-uml-plantuml</artifactId>
 
 	<dependencies>
 		<!-- internal dependencies -->
@@ -22,11 +22,6 @@
 			<groupId>distributed-uml</groupId>
 			<artifactId>distributed-uml-common</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>distributed-uml</groupId>
-			<artifactId>distributed-uml-plantuml</artifactId>
-		</dependency>
-
 		<!-- external dependencies -->
 		<dependency>
 			<groupId>org.pac4j</groupId>
@@ -39,6 +34,10 @@
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
@@ -91,8 +90,16 @@
 			<artifactId>orika-core</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>net.sourceforge.plantuml</groupId>
+			<artifactId>plantuml</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
 		</dependency>
 	</dependencies>
 

@@ -20,6 +20,7 @@
 		<spark-pac4j.version>1.1.0</spark-pac4j.version>
 		<pac4j.version>1.8.8</pac4j.version>
 		<slf4j.version>1.7.7</slf4j.version>
+		<guava.version>18.0</guava.version>
 		<reflections.version>0.9.10</reflections.version>
 		<rs-api.version>2.0.1</rs-api.version>
 	</properties>
@@ -35,6 +36,16 @@
 			<dependency>
 				<groupId>${project.groupId}</groupId>
 				<artifactId>distributed-uml-common</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>${project.groupId}</groupId>
+				<artifactId>distributed-uml-plantuml</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>${project.groupId}</groupId>
+				<artifactId>distributed-uml-ui</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
@@ -73,6 +84,14 @@
 			    <artifactId>swagger-annotations</artifactId>
 			    <version>${swagger.version}</version>
 			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
+			<dependency>
+			    <groupId>com.google.guava</groupId>
+			    <artifactId>guava</artifactId>
+			    <version>${guava.version}</version>
+			</dependency>
+
 
 			<!-- reflection -->
 			<dependency>
@@ -333,5 +352,7 @@
 		<module>distributed-uml-server</module>
 		<module>distributed-uml-common</module>
 		<module>distributed-uml-model</module>
+		<module>distributed-uml-plantuml</module>
+		<module>distributed-uml-ui</module>
 	</modules>
 </project>
