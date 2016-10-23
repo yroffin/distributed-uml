@@ -9,7 +9,6 @@
 	</parent>
 	
 	<name>PlantUml service</name>
-	<groupId>distributed-uml</groupId>
 	<artifactId>distributed-uml-plantuml</artifactId>
 
 	<dependencies>

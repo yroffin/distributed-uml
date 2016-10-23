@@ -45,6 +45,11 @@
 			</dependency>
 			<dependency>
 				<groupId>${project.groupId}</groupId>
+				<artifactId>distributed-uml-etherpad-gateway</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>${project.groupId}</groupId>
 				<artifactId>distributed-uml-ui</artifactId>
 				<version>${project.version}</version>
 			</dependency>
@@ -52,6 +57,13 @@
 				<groupId>${project.groupId}</groupId>
 				<artifactId>distributed-uml-server</artifactId>
 				<version>${project.version}</version>
+			</dependency>
+
+			<!-- https://github.com/nilsfr/java-etherpad-lite -->
+			<dependency>
+			    <groupId>net.gjerull.etherpad</groupId>
+			    <artifactId>etherpad_lite_client</artifactId>
+			    <version>1.2.12</version>
 			</dependency>
 
 			<dependency>
@@ -353,6 +365,7 @@
 		<module>distributed-uml-common</module>
 		<module>distributed-uml-model</module>
 		<module>distributed-uml-plantuml</module>
+		<module>distributed-uml-etherpad-gateway</module>
 		<module>distributed-uml-ui</module>
 	</modules>
 </project>

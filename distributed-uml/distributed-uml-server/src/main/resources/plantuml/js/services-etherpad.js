@@ -16,25 +16,24 @@
 
 'use strict';
 
-/**
- * Declare app level module which depends on filters, and services
- */
+/* Services */
 
-angular.module('plantuml.app', [
-     'ngMaterial',
-     'ngMdIcons',
-     'ngSanitize',
-     'restangular',
-     'ui.router',
-     'ui.router.router',
-     'pascalprecht.translate',
-     'ngCookies',
-     'etherpad.services',
-     'plantuml.app.config',
-     'plantuml.app.routes',
-     /**
-      * directives
-      */
-     'plantuml.directives.home',
-     'plantuml.directives.plantuml',
-]);
+var myAppServices = angular.module('etherpad.services', [ 'ngResource' ]);
+
+/**
+ * toastService
+ */
+myAppServices.factory('etherpadService', [ '$log', 'Restangular', function($log, Restangular) {
+	 var resources = {
+			 get: function(callback, failure) {
+				 Restangular.one('/api/etherpad', '1').get().then(
+						 	callback,
+							function(errors){
+								failure(errors);
+							}
+				)
+			 }
+	 }
+	 return resources;
+}]);
+

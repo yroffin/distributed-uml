@@ -7,10 +7,11 @@
 		<version>0.0.1-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
-
-	<artifactId>distributed-uml-server</artifactId>
-	<name>Server module</name>
+	<groupId>distributed-uml</groupId>
+	<artifactId>distributed-uml-etherpad-gateway</artifactId>
 	<packaging>jar</packaging>
+	
+	<name>Etherpad gateway module</name>
 
 	<dependencies>
 		<!-- internal dependencies -->
@@ -22,15 +23,6 @@
 			<groupId>distributed-uml</groupId>
 			<artifactId>distributed-uml-common</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>distributed-uml</groupId>
-			<artifactId>distributed-uml-plantuml</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>distributed-uml</groupId>
-			<artifactId>distributed-uml-etherpad-gateway</artifactId>
-		</dependency>
-
 		<!-- external dependencies -->
 		<dependency>
 			<groupId>org.pac4j</groupId>
@@ -43,6 +35,10 @@
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
@@ -95,8 +91,20 @@
 			<artifactId>orika-core</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>net.sourceforge.plantuml</groupId>
+			<artifactId>plantuml</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>net.gjerull.etherpad</groupId>
+			<artifactId>etherpad_lite_client</artifactId>
 		</dependency>
 	</dependencies>
 

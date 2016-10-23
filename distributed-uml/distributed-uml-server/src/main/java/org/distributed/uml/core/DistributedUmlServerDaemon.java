@@ -14,11 +14,13 @@
  *   limitations under the License.
  */
 
-package org.distributed.uml.services;
+package org.distributed.uml.core;
 
 
 import javax.annotation.PostConstruct;
 
+import org.distributed.uml.services.EtherpadGatewayResources;
+import org.distributed.uml.services.PlantUmlResources;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,14 +40,17 @@ import com.google.common.collect.ImmutableList;
 	@PropertySource(value = "classpath:server.properties", ignoreResourceNotFound = true),
 	@PropertySource(value = "file://${distributed-uml.user.dir}/config.properties", ignoreResourceNotFound = true)
 })
-public class PlantUmlServerDaemon {
-	protected Logger logger = LoggerFactory.getLogger(PlantUmlServerDaemon.class);
+public class DistributedUmlServerDaemon {
+	protected Logger logger = LoggerFactory.getLogger(DistributedUmlServerDaemon.class);
 
 	@Autowired
 	Environment env;
 
 	@Autowired
-	PlantUmlService plantUmlService;
+	EtherpadGatewayResources etherpadGatewayResources;
+	
+	@Autowired
+	PlantUmlResources plantUmlResources;
 	
 	protected ObjectMapper mapper = new ObjectMapper();
 	
@@ -76,11 +81,10 @@ public class PlantUmlServerDaemon {
 		spark.Spark.staticFiles.expireTime(0);
 
 		/**
-		 * Build plantuml uml api
+		 * mount all resources
 		 */
-		spark.Spark.post("/api/plantuml", (req, res) -> {
-			return plantUmlService.svg(req.body());
-		});
+		etherpadGatewayResources.mount();
+		plantUmlResources.mount();
 
 		spark.Spark.after((request, response) -> {
 		    response.header("Content-Encoding", "gzip");

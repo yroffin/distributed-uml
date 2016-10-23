@@ -16,10 +16,10 @@
 
 /* Directives */
 
-angular.module('plantuml.directives.plantuml', ['plantuml.app.services'])
+angular.module('plantuml.directives.plantuml', ['plantuml.app.services', 'etherpad.services'])
 .controller('plantumlCtrl',
-		[ '$scope', '$log', '$stateParams', 'plantumlWidgetPlantumlService', 'toastService',
-	function($scope, $log, $stateParams, plantumlPlantumlService, toastService){
+		[ '$scope', '$log', '$stateParams', 'plantumlWidgetPlantumlService', 'toastService', 'etherpadService',
+	function($scope, $log, $stateParams, plantumlPlantumlService, toastService, etherpadService){
 	$scope.starUml = "essai";
     /**
      * watcher
@@ -31,11 +31,13 @@ angular.module('plantuml.directives.plantuml', ['plantuml.app.services'])
      * submit
      */
     $scope.submit = function(newValue, oldValue, scope) {
-    	plantumlPlantumlService.post(newValue,function(result){
-			$log.info('submit', result);
-			$( "#starUml" ).html( result );
-		}, function() {
-			
+		etherpadService.get(function (padValue) {
+	    	plantumlPlantumlService.post(padValue,function(result){
+				$log.info('submit', result);
+				$( "#starUml" ).html( result );
+			}, function() {
+				
+			});
 		});
     }
     /**
