@@ -18,7 +18,7 @@
 
 /* Services */
 
-var myAppServices = angular.module('etherpad.services', [ 'ngResource' ]);
+var myAppServices = angular.module('distributed.uml.services.etherpad', [ 'ngResource' ]);
 
 /**
  * toastService

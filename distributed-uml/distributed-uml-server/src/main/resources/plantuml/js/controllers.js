@@ -18,7 +18,7 @@
 
 /* Controllers */
 
-angular.module('plantuml.app.config',[])
+angular.module('distributed.uml.config',['restangular'])
     .config(['RestangularProvider', function(RestangularProvider) {
 		RestangularProvider.setDefaultHeaders({
 			'content-type': 'application/json'
@@ -35,18 +35,6 @@ angular.module('plantuml.app.config',[])
 			  headers: headers,
 			  httpConfig: httpConfig
 			};
-	    });
-		/**
-		 * answer interceptor
-		 */
-	    RestangularProvider.setResponseExtractor(function(response) {
-	    	if(angular.isObject(response)) {
-	    	  var newResponse = response;
-	    	  newResponse.originalElement = response;
-	    	  return newResponse
-	    	} else {
-	    		return response;
-	    	}
 	    });
     }])
     .config(['$mdIconProvider', function($mdIconProvider) {

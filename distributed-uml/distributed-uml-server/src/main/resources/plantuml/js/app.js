@@ -20,7 +20,7 @@
  * Declare app level module which depends on filters, and services
  */
 
-angular.module('plantuml.app', [
+angular.module('distributed.uml', [
      'ngMaterial',
      'ngMdIcons',
      'ngSanitize',
@@ -29,12 +29,17 @@ angular.module('plantuml.app', [
      'ui.router.router',
      'pascalprecht.translate',
      'ngCookies',
-     'etherpad.services',
-     'plantuml.app.config',
-     'plantuml.app.routes',
+     /**
+      * services, configuration and routes
+      */
+     'distributed.uml.services.etherpad',
+     'distributed.uml.config',
+     'distributed.uml.routes',
      /**
       * directives
       */
-     'plantuml.directives.home',
-     'plantuml.directives.plantuml',
+     'distributed.uml.directives.home',
+     'distributed.uml.directives.pads',
+     'distributed.uml.directives.pad',
+     'distributed.uml.directives.plantuml'
 ]);

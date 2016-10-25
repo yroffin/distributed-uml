@@ -74,4 +74,24 @@ public class PlantUmlService {
 		final String svg = new String(os.toByteArray(), Charset.forName("UTF-8"));
 		return svg;
 	}
+
+	/**
+	 * render as svg
+	 * @param payload
+	 * @return String
+	 * @throws TechnicalException
+	 */
+	public byte[] png(String payload) throws TechnicalException {
+		SourceStringReader reader = new SourceStringReader(payload);
+		final ByteArrayOutputStream os = new ByteArrayOutputStream();
+
+		try {
+			reader.generateImage(os, new FileFormatOption(FileFormat.PNG));
+			os.close();
+		} catch (IOException e) {
+			throw new TechnicalException(e);
+		}
+
+		return os.toByteArray();
+	}
 }

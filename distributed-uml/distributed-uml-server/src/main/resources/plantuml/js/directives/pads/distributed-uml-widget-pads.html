@@ -1,0 +1,11 @@
+<md-grid-list
+        md-cols-xs="1" md-cols-sm="2" md-cols-md="4" md-cols-gt-md="6"
+        md-row-height-gt-md="1:1" md-row-height="2:2"
+        md-gutter="12px" md-gutter-gt-sm="8px" >
+    <md-grid-tile class="green" ng-repeat="pad in pads">
+	  <img class="alt" ng-src="/api/plantuml/{{pad.base64}}">
+      <md-grid-tile-footer>
+        <h3><a href="#/pads/{{pad.name}}">{{pad.name}}</a></h3>
+      </md-grid-tile-footer>
+    </md-grid-tile>
+</md-grid-list>

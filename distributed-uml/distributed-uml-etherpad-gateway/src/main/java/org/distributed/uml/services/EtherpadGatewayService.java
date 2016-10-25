@@ -16,12 +16,15 @@
 
 package org.distributed.uml.services;
 
+import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
 
 import org.distributed.uml.exception.TechnicalException;
+import org.distributed.uml.model.PadBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,32 +66,63 @@ public class EtherpadGatewayService {
 	}
 
 	/**
-	 * render as svg
-	 * @param payload
-	 * @return String
+	 * get pad
+	 * @param id
+	 * @return PadBean
 	 * @throws TechnicalException
 	 */
-	public String get(String payload) throws TechnicalException {
+	public PadBean get(String id) throws TechnicalException {
 		EPLiteClient client = new EPLiteClient("http://192.168.1.12:9001", "a7d14330f5704ecb95fad7716d1d51e60ede7dc2272ce1c91bbbed0a30e6746f");
 
+		PadBean pad = new PadBean(id);
+		
 		// Get pad text
-		String text = client.getText("my_pad").get("text").toString();
-		return text;
+		pad.text = client.getText(id).get("text").toString();
+		try {
+			pad.base64 = encode(pad.text);
+		} catch (Exception e) {
+			throw new TechnicalException(e);
+		}
+
+		return pad;
 	}
 
 	/**
-	 * render as svg
-	 * @param payload
-	 * @return String
+	 * internal method
+	 * @param value
+	 * @return
+	 * @throws Exception
+	 */
+	private static String encode(String value) throws Exception {
+	      return Base64.getEncoder().encodeToString(value.getBytes());
+	}
+
+	/**
+	 * find all
+	 * @return List<PadBean>
 	 * @throws TechnicalException
 	 */
-	public String findAll(String payload) throws TechnicalException {
+	@SuppressWarnings("unchecked")
+	public List<PadBean> findAll() throws TechnicalException {
 		EPLiteClient client = new EPLiteClient("http://192.168.1.12:9001", "a7d14330f5704ecb95fad7716d1d51e60ede7dc2272ce1c91bbbed0a30e6746f");
 
-		// Get list of all pad ids
-		Map result = client.listAllPads();
-		List padIds = (List) result.get("padIDs");
+		// init result
+		List<PadBean> result = new ArrayList<PadBean>();
 		
-		return result.toString();
+		// Get list of all pad ids
+		@SuppressWarnings("rawtypes")
+		Map pads = client.listAllPads();
+		for(String item : (List<String>) pads.get("padIDs")) {
+			PadBean bean = new PadBean(item);
+			result.add(bean);
+			bean.text = client.getText(item).get("text").toString();
+			try {
+				bean.base64 = encode(bean.text);
+			} catch (Exception e) {
+				throw new TechnicalException(e);
+			}
+		}
+		
+		return result;
 	}
 }

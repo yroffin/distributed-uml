@@ -35,7 +35,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 	@PropertySource(value = "classpath:server.properties", ignoreResourceNotFound = true),
 	@PropertySource(value = "file://${distributed-uml.user.dir}/config.properties", ignoreResourceNotFound = true)
 })
-public class EtherpadGatewayResources {
+public class EtherpadGatewayResources extends ApiResources {
 	protected Logger logger = LoggerFactory.getLogger(EtherpadGatewayResources.class);
 
 	@Autowired
@@ -57,10 +57,10 @@ public class EtherpadGatewayResources {
 			return etherpadGatewayService.create(req.body());
 		});
 		spark.Spark.get("/api/etherpad/:id", (req, res) -> {
-			return etherpadGatewayService.get(req.body());
+			return mapper.writeValueAsString(etherpadGatewayService.get(req.params(":id")));
 		});
 		spark.Spark.get("/api/etherpad", (req, res) -> {
-			return etherpadGatewayService.findAll(req.body());
+			return mapper.writeValueAsString(etherpadGatewayService.findAll());
 		});
 	}
 }

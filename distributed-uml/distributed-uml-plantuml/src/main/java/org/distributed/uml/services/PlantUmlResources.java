@@ -17,6 +17,9 @@
 package org.distributed.uml.services;
 
 
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +49,11 @@ public class PlantUmlResources {
 	
 	protected ObjectMapper mapper = new ObjectMapper();
 	
+	private static String decode(String value) throws Exception {
+	      byte[] decodedValue = Base64.getDecoder().decode(value);
+	      return new String(decodedValue, StandardCharsets.UTF_8);
+	}
+
 	/**
 	 * mount all resources
 	 */
@@ -55,6 +63,14 @@ public class PlantUmlResources {
 		 */
 		spark.Spark.post("/api/plantuml", (req, res) -> {
 			return plantUmlService.svg(req.body());
+		});
+		spark.Spark.patch("/api/plantuml", (req, res) -> {
+			res.type("image/png");
+			return plantUmlService.png(req.body());
+		});
+		spark.Spark.get("/api/plantuml/:id", (req, res) -> {
+			res.type("image/png");
+			return plantUmlService.png(decode(req.params(":id")));
 		});
 	}
 }

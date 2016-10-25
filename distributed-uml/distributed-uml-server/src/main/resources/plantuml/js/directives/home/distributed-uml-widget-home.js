@@ -16,30 +16,30 @@
 
 /* Directives */
 
-angular.module('plantuml.directives.home', ['plantuml.app.services'])
-.controller('homeCtrl',
-		[ '$scope', '$log', '$stateParams', 'plantumlWidgetHomeService', 'toastService',
-	function($scope, $log, $stateParams, plantumlHomeService, toastService){
+angular.module('distributed.uml.directives.home', ['distributed.uml.services','distributed.uml.services.etherpad'])
+.controller('homeWidgetCtrl',
+		[ '$scope', '$log', '$stateParams', 'distributedUmlWidgetHomeService', 'toastService',
+	function($scope, $log, $stateParams, distributedUmlWidgetHomeService, toastService){
     /**
      * loading
      */
     $scope.load = function() {
-		$log.info('homeCtrl loaded');
+		$log.info('homeWidgetCtrl loaded');
     }
 }])
-.factory('plantumlWidgetHomeService', [ function() {
+.factory('distributedUmlWidgetHomeService', [ function() {
 	return {
 	}
 }])
 /**
- * plantumlWidgetHome
+ * widget distributed-uml-widget-home
  */
-.directive('plantumlWidgetHome', [ '$log', '$stateParams', function ($log, $stateParams) {
+.directive('distributedUmlWidgetHome', [ '$log', '$stateParams', function ($log, $stateParams) {
   return {
     restrict: 'E',
-    templateUrl: '/js/directives/home/plantuml-widget-home.html',
+    templateUrl: '/js/directives/home/distributed-uml-widget-home.html',
     link: function(scope, element, attrs) {
-		$log.info('plantuml-widget-home loaded');
+		$log.info('distributed-uml-widget-home loaded');
     }
   }
 }])

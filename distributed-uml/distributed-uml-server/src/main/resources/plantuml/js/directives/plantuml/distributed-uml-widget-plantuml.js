@@ -16,10 +16,10 @@
 
 /* Directives */
 
-angular.module('plantuml.directives.plantuml', ['plantuml.app.services', 'etherpad.services'])
-.controller('plantumlCtrl',
-		[ '$scope', '$log', '$stateParams', 'plantumlWidgetPlantumlService', 'toastService', 'etherpadService',
-	function($scope, $log, $stateParams, plantumlPlantumlService, toastService, etherpadService){
+angular.module('distributed.uml.directives.plantuml', ['distributed.uml.services', 'distributed.uml.services.etherpad'])
+.controller('distributedUmlWidgetPlantumlCtrl',
+		[ '$scope', '$log', '$stateParams', 'distributedUmlWidgetPlantumlService', 'etherpadService', 'toastService',
+	function($scope, $log, $stateParams, distributedUmlWidgetPlantumlService, etherpadService, toastService){
 	$scope.starUml = "essai";
     /**
      * watcher
@@ -32,7 +32,7 @@ angular.module('plantuml.directives.plantuml', ['plantuml.app.services', 'etherp
      */
     $scope.submit = function(newValue, oldValue, scope) {
 		etherpadService.get(function (padValue) {
-	    	plantumlPlantumlService.post(padValue,function(result){
+			distributedUmlWidgetPlantumlService.post(padValue,function(result){
 				$log.info('submit', result);
 				$( "#starUml" ).html( result );
 			}, function() {
@@ -51,7 +51,7 @@ angular.module('plantuml.directives.plantuml', ['plantuml.app.services', 'etherp
 		$log.info('plantumlCtrl loaded');
     }
 }])
-.factory('plantumlWidgetPlantumlService', [ 'Restangular', function(Restangular) {
+.factory('distributedUmlWidgetPlantumlService', [ 'Restangular', function(Restangular) {
 	return {
 		post: function(element, handler, errors) {
 			Restangular.all('/api').all('/plantuml').post(element).then(handler,function(errors){failure(errors);});
@@ -59,15 +59,15 @@ angular.module('plantuml.directives.plantuml', ['plantuml.app.services', 'etherp
 	}
 }])
 /**
- * plantumlWidgetPlantuml
+ * widget distributed-uml-widget-plantuml
  */
-.directive('plantumlWidgetPlantuml', [ '$log', '$stateParams', function ($log, $stateParams) {
+.directive('distributedUmlWidgetPlantuml', [ '$log', '$stateParams', function ($log, $stateParams) {
   return {
     restrict: 'E',
-    controller: 'plantumlCtrl',
-    templateUrl: '/js/directives/plantuml/plantuml-widget-plantuml.html',
+    controller: 'distributedUmlWidgetPlantumlCtrl',
+    templateUrl: '/js/directives/plantuml/distributed-uml-widget-plantuml.html',
     link: function(scope, element, attrs) {
-    	$log.info('plantuml-widget-plantuml loaded');
+    	$log.info('distributed-uml-widget-plantuml loaded');
     }
   }
 }])

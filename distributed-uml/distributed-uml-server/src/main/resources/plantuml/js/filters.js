@@ -18,7 +18,7 @@
 
 /* Filters */
 
-angular.module('plantuml.app.filters', []).
+angular.module('distributed.uml.filters', []).
     filter('interpolate', ['version', function(version) {
       return function(text) {
         return String(text).replace(/\%VERSION\%/mg, version);

@@ -1,0 +1,16 @@
+<div ng-cloak>
+  <md-content>
+    <md-tabs md-dynamic-height md-border-bottom>
+      <md-tab label="PNG">
+        <md-content class="md-padding">
+			<img ng-src="/api/plantuml/{{pad.base64}}">
+        </md-content>
+      </md-tab>
+      <md-tab label="PAD">
+        <md-content class="md-padding">
+          <iframe ng-src="{{trusted}}" width="100%" height="400"></iframe>
+        </md-content>
+      </md-tab>
+    </md-tabs>
+  </md-content>
+</div>

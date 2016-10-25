@@ -18,7 +18,7 @@
 
 /* Controllers */
 
-angular.module('plantuml.app.routes',['plantuml.app.config'])
+angular.module('distributed.uml.routes',['distributed.uml.config'])
     .config( ['$urlRouterProvider', function($urlRouterProvider) {
         /**
          * default state
@@ -32,7 +32,15 @@ angular.module('plantuml.app.routes',['plantuml.app.config'])
         $stateProvider
         .state('home', {
             url: '/home',
-            template: '<plantuml-widget-home></plantuml-widget-home>'
+            template: '<distributed-uml-widget-home></distributed-uml-widget-home>'
+        })
+        .state('pads', {
+            url: '/pads',
+            template: '<distributed-uml-widget-pads></distributed-uml-widget-pads>'
+        })
+        .state('pad-by-id', {
+            url: '/pads/:id',
+            template: '<distributed-uml-widget-pad></distributed-uml-widget-pad>'
         })
         ;
     }]);
